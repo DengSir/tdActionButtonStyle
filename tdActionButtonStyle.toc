@@ -1,0 +1,8 @@
+## Interface: 70000
+## Title: tdActionButtonStyle
+## Author: DengSir
+## Version: 70000.01
+## LoadManagers: AddonLoader
+## X-LoadOn-Always: delayed
+
+Addon.lua
