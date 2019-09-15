@@ -4,6 +4,7 @@ local Addon = LibStub('AceAddon-3.0'):NewAddon('tdActionButtonStyle', 'AceEvent-
 function Addon:OnInitialize()
     self.buttonNames = {}
 
+    self:SecureHook('ActionButton_UpdateCount')
     self:SecureHook('SetActionUIButton', 'InitButton')
     self:RegisterEvent('ACTIONBAR_SHOWGRID', 'ShowAllNames')
     self:RegisterEvent('ACTIONBAR_HIDEGRID', 'HideAllNames')
@@ -35,5 +36,17 @@ end
 function Addon:ShowAllNames()
     for name in pairs(self.buttonNames) do
         name:Show()
+    end
+end
+
+function Addon:ActionButton_UpdateCount(button)
+    local action = button.action
+    if IsItemAction(action) then
+        return
+    end
+
+    local count = GetActionCount(action)
+    if count > 0 then
+        button.Count:SetText(count > (button.maxDisplayCount or 99) and '*' or count)
     end
 end
